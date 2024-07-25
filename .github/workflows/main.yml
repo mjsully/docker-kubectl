@@ -22,10 +22,25 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: build
-        run: |
-          docker build . -t ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
+    #   - name: build
+    #     run: |
+    #       docker build . -t ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
 
-      - name: publish
-        run: |
-          docker push ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
+    #   - name: publish
+    #     run: |
+    #       docker push ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
+
+      - name: extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: build and push
+        uses: actions/build-push-action@v3
+        with: 
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
