@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+LABEL org.opencontainers.image.source=https://github.com/mjsully/docker-kubectl
+
 RUN apt update -y
 RUN apt install -y apt-transport-https ca-certificates curl gnupg
 
