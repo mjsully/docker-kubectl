@@ -34,4 +34,4 @@ jobs:
           context: .
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          platforms: linux/arm/v7, linux/arm64, linux/amd64
+          platforms: linux/arm64, linux/amd64
