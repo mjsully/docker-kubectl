@@ -1,4 +1,4 @@
-name: Publish image to ghcr.io
+name: Publish image to ghcr.io (github)
 
 on:
   [workflow_dispatch]
